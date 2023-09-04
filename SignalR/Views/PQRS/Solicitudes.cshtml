@@ -1,0 +1,42 @@
+﻿@model IEnumerable<SignalR_Core.Models.Solicitud>;
+
+@{
+    ViewData["Title"] = "Solicitudes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles{
+    <link href="~/css/Solicitudes.css" rel="stylesheet"/>
+}
+
+<div class="solicitudes">
+    <div class="solicitudes__header">
+        <h1 class="solicitudes__title">Solicitudes</h1>
+        <a asp-action="UpsertSolicitud" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Crear Nuevo</a>
+    </div>
+
+    <div class="solicitudes__gallery">
+        @foreach (var item in Model)
+        {
+            <ul class="solicitudes__list">
+                <li><b>ID: </b> @item.Id </li>
+                <li><b>Empresa: </b>@item.Empresa </li>
+                <li><b>Tipo:</b> @item.Tipo </li>
+                <li><b>Titulo:</b> @item.Titulo </li>
+                <li><b>Fecha Creación:</b> @item.FechaCreacion.ToString("d") </li>
+                <li><b>Fecha Actualización:</b> @item.FechaActualizacion.ToString("d")  </li>
+                <li><b>Estado:</b> @item.Estado</li>
+                <li>
+                    <a asp-action="UpsertSolicitud" asp-route-id="@item.Id" class="btn btn-outline-success"><i class="fa-solid fa-pen"></i></a>
+                    <a class="btn btn-outline-danger mx-1"><i class="fa-solid fa-trash-can"></i></a>
+                    <a class="btn btn-outline-warning"><i class="fa-solid fa-file-pdf"></i></a>
+                </li>
+            </ul>
+        }
+    </div>
+
+
+</div>
+
+
+

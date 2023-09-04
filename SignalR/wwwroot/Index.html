@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+    <div id="content1">
+
+    </div>
+
+    <div id="content2">
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.10/signalr.min.js" integrity="sha512-P5G3EZ6/6i+YfHLRhH32IxWKYtw0XyeYODsBn6eXzHt7W0Z+MZ1kySXUT0ec0+WuxHEoYkjHlSnTCItpg1XMGg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/7.8.1/rxjs.umd.min.js" integrity="sha512-D9LDs8YUUVa4V9Gl4Zb+xqRAc7RCzooR3+zzebgK2RMu/KU+dh90pbjEEMzPiSyRSGbSp9j1pZnrO4joGa5WEg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <script type="text/javascript">
+
+        let cont1 = document.getElementById("content1").value;
+        console.log(cont1)
+
+        //RxJs
+        const subject = new rxjs.Subject();
+        subject.subscribe((message) => {
+            content1.innerHTML += `<div><strong>${message}</strong></div>` 
+        })
+
+        subject.subscribe((message) => {
+            content2.innerHTML += `<div>${message}</div>`
+        })
+
+
+        //Hub Funcional SignalR
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/message")
+            .build();
+
+        connection.start()
+            .then(() => {
+                console.log("Se conecto")
+            })
+            .catch(() => console.error(error.message))
+
+        connection.on("sendMessage", (message) => {
+            console.log(message)
+            subject.next(message)
+        })
+
+
+    </script>
+
+</body>
+</html>

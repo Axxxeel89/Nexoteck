@@ -1,0 +1,55 @@
+﻿@using SignalR_Core.ViewModels;
+@model LoginViewModel;
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+@section Estilos{
+    <link href="~/css/Login.css" rel="stylesheet" />
+}
+
+<div class="login">
+    <div class="login__content">
+        <form asp-action="Login" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="d-flex flex-column justify-content-center">
+                <div class="login_contentetitle">
+                    <img src="~/RecursosPlantilla/img/imgLogin/logoZoneteck.png" class="login__img"/>                    
+                </div>
+                <div class="col mt-3">
+                    <label asp-for="@Model.Email" class="form-label"></label>
+                    <input asp-for="@Model.Email" class="form-control" type="email" />
+                    <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                </div>
+
+                <div class="col mt-3">
+                    <label asp-for="@Model.Password" class="form-label"></label>
+                    <input asp-for="@Model.Password" class="form-control" />
+                    <span asp-validation-for="@Model.Password" class="text-danger"></span>
+                </div>
+
+                <div class="col mt-3">
+                    <label asp-for="@Model.RemenberMe" class="form-label"></label>
+                    <input asp-for="@Model.RemenberMe" class="form-check" type="checkbox" />
+                    <span asp-validation-for="@Model.RemenberMe" class="text-danger"></span>
+                </div>
+
+                <div class="login__ctablock">
+                    <button type="submit" class="login__cta"><i class="fa-solid fa-right-to-bracket"></i> Acceder</button>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <div class="login__footer">
+        <h5 class="login__foote--text">© 2023 - Zoneteck - Todos los derechos reservados | Web Design By John A. Rios</h5>
+    </div>
+
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+

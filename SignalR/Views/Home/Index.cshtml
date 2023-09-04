@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="home">
+    <h1 class="home__title">Bienvenido</h1>
+
+    <p class="home__paragraph">Para generar una PQR puedes ir al menú principal o en la parte inferior puedes dar click según sea la necesidad a reportar.</h3>
+
+    <div class="home__content">
+@*       <img class="home__img--solicitud" src="~/RecursosPlantilla/img/imgHome/solicitudes.jpg" />
+        <img class="home__img--incidente" src="https://assets-blog.hostgator.mx/wp-content/uploads/2018/10/paginas-de-error-hostgator.webp" />*@
+
+        <div>
+            <a asp-controller="PQRS" asp-action="Solicitudes">
+                <img class="home__img" src="~/RecursosPlantilla/img/imgHome/request.jpg" />
+                <h5 class="home__legend">Reportar Solicitud</h5>
+            </a>
+        </div>
+        
+        <div>
+            <a asp-controller="PQRS" asp-action="Incidentes">
+                <img class="home__img" src="~/RecursosPlantilla/img/imgHome/incident.jpg" />
+                <h5 class="home__legend">Reportar Incidente</h5>
+            </a>
+        </div>
+
+
+    </div>
+</div>
+
+ 
+
+          

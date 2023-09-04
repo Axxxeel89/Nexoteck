@@ -1,0 +1,14 @@
+C:\labs\PracticaPrueba\SignalR\SignalR_Core\bin\Debug\net7.0\SignalR_Core.deps.json
+C:\labs\PracticaPrueba\SignalR\SignalR_Core\bin\Debug\net7.0\SignalR_Core.runtimeconfig.json
+C:\labs\PracticaPrueba\SignalR\SignalR_Core\bin\Debug\net7.0\SignalR_Core.dll
+C:\labs\PracticaPrueba\SignalR\SignalR_Core\bin\Debug\net7.0\SignalR_Core.pdb
+C:\labs\PracticaPrueba\SignalR\SignalR_Core\obj\Debug\net7.0\SignalR_Core.csproj.AssemblyReference.cache
+C:\labs\PracticaPrueba\SignalR\SignalR_Core\obj\Debug\net7.0\SignalR_Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\labs\PracticaPrueba\SignalR\SignalR_Core\obj\Debug\net7.0\SignalR_Core.AssemblyInfoInputs.cache
+C:\labs\PracticaPrueba\SignalR\SignalR_Core\obj\Debug\net7.0\SignalR_Core.AssemblyInfo.cs
+C:\labs\PracticaPrueba\SignalR\SignalR_Core\obj\Debug\net7.0\SignalR_Core.csproj.CoreCompileInputs.cache
+C:\labs\PracticaPrueba\SignalR\SignalR_Core\obj\Debug\net7.0\SignalR_Core.dll
+C:\labs\PracticaPrueba\SignalR\SignalR_Core\obj\Debug\net7.0\refint\SignalR_Core.dll
+C:\labs\PracticaPrueba\SignalR\SignalR_Core\obj\Debug\net7.0\SignalR_Core.pdb
+C:\labs\PracticaPrueba\SignalR\SignalR_Core\obj\Debug\net7.0\SignalR_Core.genruntimeconfig.cache
+C:\labs\PracticaPrueba\SignalR\SignalR_Core\obj\Debug\net7.0\ref\SignalR_Core.dll

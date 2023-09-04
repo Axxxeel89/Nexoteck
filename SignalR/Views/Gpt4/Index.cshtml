@@ -1,0 +1,36 @@
+﻿@model SignalR_Core.Models.Assistant;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Consola de analisis GPT-4</h1>
+
+@if(Model.Answer != null)
+{
+
+    @foreach (var info in Model.Answer)
+    {
+        <div>@Model.Answer</div>
+    }
+
+}
+
+<form asp-action="GenerarRespuestaGPT4">
+    <textarea class="form-control" asp-for="@Model.Prompt" id="txt"></textarea>
+    <button class="btn btn-primary">Generar</button></td>
+    <td><button class="btn btn-danger">Limpiar</button>
+</form>
+<br />
+
+
+<div></div>
+
+
+@section Scripts{
+
+    <script>
+
+
+    </script>
+}

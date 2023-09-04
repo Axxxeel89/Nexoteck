@@ -1,0 +1,103 @@
+﻿@using SignalR_Core.Models;
+@model SignalR_Core.Models.Solicitud;
+@{
+    ViewData["Title"] = "UpsertSolicitud";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var titulo = "Crear solicitud";
+}
+
+@section Styles{
+    <link href="~/css//Solicitudes.css" rel="stylesheet" />
+}
+
+<div class="upsert">
+    @if (Model.Id != 0)
+    {
+        titulo = "Actualizar solicitud";
+        <input asp-for="Id" hidden />
+    }
+
+    <h1 class="upsert__title">@titulo</h1>
+
+    <div class="border mt-3 mb-5 p-4">
+        <form asp-action="UpsertSolicitud" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row mt-4">
+                <div class="col">
+                    <label asp-for="@Model.Tipo" class="form-label"></label>
+                    <select asp-for="@Model.Tipo" class="form-select" asp-items="Html.GetEnumSelectList<TipoEnum>()">
+                        <option disabled selected>--Elige Tipo--</option>
+                    </select>
+                    <span asp-validation-for="@Model.Tipo" class="text-danger"></span>
+                </div>
+
+                <div class="col">
+                    <label asp-for="@Model.Titulo" class="form-label"></label>
+                    <input asp-for="@Model.Titulo" class="form-control" type="text" placeholder="Agrega el titulo de la solicitud" />
+                    <span asp-validation-for="@Model.Titulo" class="text-danger"></span>
+                </div>
+
+                <div class="col">
+                    <label asp-for="@Model.FechaCreacion" class="form-label"></label>
+                    <input asp-for="@Model.FechaCreacion" class="form-control" type="date" />
+                    <span asp-validation-for="@Model.FechaCreacion" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mt-3">
+                      <div class="col">
+                    <label asp-for="@Model.FechaActualizacion" class="form-label"></label>
+                    <input asp-for="@Model.FechaActualizacion" class="form-control" type="date" />
+                    <span asp-validation-for="@Model.FechaActualizacion" class="text-danger"></span>
+                </div>
+
+                <div class="col">
+                    <label asp-for="@Model.Empresa" class="form-label"></label>
+                    <input asp-for="@Model.Empresa" readonly class="form-control" type="text" />
+                    <span asp-validation-for="@Model.Empresa" class="text-danger"></span>
+                </div>
+
+                <div class="col">
+                    <label asp-for="@Model.Estado" class="form-label"></label>
+                    <select asp-for="@Model.Estado" class="form-select" asp-items="Html.GetEnumSelectList<Estado>()">
+                        <option disabled selected>--Elige Estado--</option>
+                    </select>
+                    <span asp-validation-for="@Model.Estado" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <label asp-for="@Model.Descripcion" class="form-label"></label>
+                    <textarea asp-for="@Model.Descripcion" class="form-control summernote" placeholder="Agrega una descripción de la solicitud"></textarea>
+                    <span asp-validation-for="@Model.Descripcion" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col">
+                    <label asp-for="@Model.ObservacionesTecnicas" class="form-label"></label>
+                    <textarea asp-for="@Model.ObservacionesTecnicas" class="form-control summernote" placeholder="Reservado para las notas del desarrollador"></textarea>
+                    <span asp-validation-for="@Model.ObservacionesTecnicas" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="btn-group mt-5">
+                <button class="btn btn-primary mx-2"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
+                <a asp-action="Solicitudes" class="btn btn-secondary"><i class="fa-solid fa-circle-left"></i> Regresar</a>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(document).ready(function () {
+           $('.summernote').summernote({
+               height: 150 });
+        });
+
+    </script>
+}

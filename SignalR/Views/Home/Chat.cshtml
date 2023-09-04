@@ -1,0 +1,97 @@
+﻿
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<IdentityUser> UserManager;
+
+@{
+    ViewData["Title"] = "Chat";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles{
+    <style>
+        .prompt {
+            width: 90%;
+            height: 400px;
+            border: 1px solid gray;
+            border-radius: 4px;
+            margin: 50px 0;
+            padding: 20px;
+            overflow-x: auto;
+        }
+    </style>
+}
+
+<div class="container">
+    <h1>Sala de chat</h1>
+    <h3>Bienvenido <span>@UserManager.GetUserName(User)</span> </h3>
+    <input id="usuario" hidden value="@UserManager.GetUserName(User)" />
+
+    <div id="chatPrompt" class="prompt">
+    </div>
+
+    <textarea id="cajaTexto" class="form-control"></textarea>
+    <button id="btnEnviar" type="button" onclick="enviarMensaje()" class="btn btn-primary mt-2">Enviar</button>
+
+
+</div>
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.10/signalr.min.js" integrity="sha512-P5G3EZ6/6i+YfHLRhH32IxWKYtw0XyeYODsBn6eXzHt7W0Z+MZ1kySXUT0ec0+WuxHEoYkjHlSnTCItpg1XMGg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/7.8.1/rxjs.umd.min.js" integrity="sha512-D9LDs8YUUVa4V9Gl4Zb+xqRAc7RCzooR3+zzebgK2RMu/KU+dh90pbjEEMzPiSyRSGbSp9j1pZnrO4joGa5WEg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script type="text/javascript">
+        var usuarioConectado = "";
+        window.onload = function () {
+            usuarioConectado = document.getElementById("usuario").value;
+            ObtenerMensajes();
+        }
+
+        const subject = new rxjs.Subject();
+        subject.subscribe((messageChat) => {
+            chatPrompt.innerHTML += `<div><b>${usuarioConectado}:</b> ${messageChat}</div>`
+        })
+
+        //funcion para conexion al Hub
+
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl('/messageChat')
+            .build();
+
+        connection.start()
+            .then(() => {
+                console.log("Se conecto al hub")
+            })
+            .catch(() => console.error(error.message))
+
+        connection.on("sendMessage", (messageChat) => {
+            subject.next(messageChat)
+        })
+
+        //Funcion para enviar mensaje
+
+        function enviarMensaje() {
+            let message = document.getElementById("cajaTexto").value;
+
+            fetch("api/ChatHub?messageChat=" + message)
+
+            document.getElementById("cajaTexto").value = '';
+        }
+
+        //Llenar prompt de chat
+        function ObtenerMensajes() {
+            fetch("Home/RecuperarInfoChat")
+                .then(response => response.json())
+                .then(function (data) {
+                    console.log(data)
+
+                    for (var i = 0; i < data.length; i++) {
+                        chatPrompt.innerHTML += `<div><b>${data[i].userName}:</b> ${data[i].message}</div>`
+                    }
+
+                })
+        }
+
+
+    </script>
+}
+
